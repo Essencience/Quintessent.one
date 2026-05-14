@@ -93,7 +93,7 @@
       }
 
       .root > .card {
-        border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+        border-color: #a78bfa;
       }
 
       @media (max-width: 720px) {
@@ -159,7 +159,9 @@
           document.getElementById("tree-root").append(tree);
         })
         .catch((error) => {
-          document.getElementById("description").textContent = error.message;
+          console.error(error);
+          document.getElementById("description").textContent =
+            "Failed to load constitutional principles. Please refresh the page or check your connection.";
         });
     </script>
   </body>
