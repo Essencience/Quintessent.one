@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Constitutional Coherence Tree</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b1020;
+        --surface: rgba(255, 255, 255, 0.06);
+        --border: rgba(255, 255, 255, 0.15);
+        --text: #eef2ff;
+        --muted: #cbd5e1;
+        --accent: #8b5cf6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, sans-serif;
+        background: linear-gradient(180deg, var(--bg), #111827);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1.25rem 4rem;
+      }
+
+      h1,
+      p {
+        margin-top: 0;
+      }
+
+      .intro {
+        max-width: 720px;
+        margin-bottom: 2rem;
+      }
+
+      .tree,
+      .tree ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .tree ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 1.25rem;
+        margin-top: 1.25rem;
+        padding-left: 1rem;
+        border-left: 2px solid var(--border);
+      }
+
+      .tree li {
+        position: relative;
+      }
+
+      .tree li::before {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 1.35rem;
+        width: 1rem;
+        border-top: 2px solid var(--border);
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 1rem;
+        backdrop-filter: blur(10px);
+        min-height: 100%;
+      }
+
+      .card h2,
+      .card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .root > .card {
+        border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+      }
+
+      @media (max-width: 720px) {
+        .tree ul {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="intro">
+        <h1>Constitutional Coherence Tree</h1>
+        <p id="description">Loading constitutional principles…</p>
+      </section>
+      <section id="tree-root" aria-live="polite"></section>
+    </main>
+    <script>
+      const renderNode = (node, level = 1) => {
+        const item = document.createElement("li");
+        item.className = level === 1 ? "root" : "";
+
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const title = document.createElement(level === 1 ? "h2" : "h3");
+        title.textContent = node.label;
+
+        const summary = document.createElement("p");
+        summary.textContent = node.summary;
+
+        card.append(title, summary);
+        item.append(card);
+
+        if (Array.isArray(node.children) && node.children.length) {
+          const branch = document.createElement("ul");
+          node.children.forEach((child) => branch.append(renderNode(child, level + 1)));
+          item.append(branch);
+        }
+
+        return item;
+      };
+
+      fetch("./constitution-tree.json")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Unable to load constitution-tree.json");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          document.getElementById("description").textContent = data.description;
+          const tree = document.createElement("ul");
+          tree.className = "tree";
+          tree.append(renderNode(data.root));
+          document.getElementById("tree-root").append(tree);
+        })
+        .catch((error) => {
+          document.getElementById("description").textContent = error.message;
+        });
+    </script>
+  </body>
+</html>

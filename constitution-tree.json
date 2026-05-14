@@ -1,0 +1,93 @@
+{
+  "title": "Constitutional Coherence Tree",
+  "description": "A binary tree of constitutional principles centered on coherence.",
+  "root": {
+    "id": "coherence",
+    "label": "Coherence",
+    "summary": "The constitution holds its principles together through balanced rights and duties.",
+    "children": [
+      {
+        "id": "freedom",
+        "label": "Freedom",
+        "summary": "Freedom protects the individual's space to think, speak, believe, and act.",
+        "children": [
+          {
+            "id": "expression",
+            "label": "Expression",
+            "summary": "Speech, writing, art, and conscience allow public reasoning and dissent.",
+            "children": [
+              {
+                "id": "press",
+                "label": "Press",
+                "summary": "Independent media supports scrutiny and circulation of ideas."
+              },
+              {
+                "id": "belief",
+                "label": "Belief",
+                "summary": "Freedom of conscience protects religion, conviction, and non-belief."
+              }
+            ]
+          },
+          {
+            "id": "association",
+            "label": "Association",
+            "summary": "People must be free to gather, organize, and participate together.",
+            "children": [
+              {
+                "id": "assembly",
+                "label": "Assembly",
+                "summary": "Peaceful gathering is essential for protest, debate, and solidarity."
+              },
+              {
+                "id": "petition",
+                "label": "Petition",
+                "summary": "Collective demands connect citizens to institutions."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "responsibility",
+        "label": "Responsibility",
+        "summary": "Constitutional order relies on fairness, limits on power, and civic reciprocity.",
+        "children": [
+          {
+            "id": "equality",
+            "label": "Equality",
+            "summary": "Equal dignity and equal treatment keep liberty from becoming privilege.",
+            "children": [
+              {
+                "id": "inclusion",
+                "label": "Inclusion",
+                "summary": "Institutions should protect minorities and widen equal access."
+              },
+              {
+                "id": "non-discrimination",
+                "label": "Non-Discrimination",
+                "summary": "No one should be excluded from rights because of identity or status."
+              }
+            ]
+          },
+          {
+            "id": "justice",
+            "label": "Justice",
+            "summary": "Public power must be lawful, reviewable, and answerable to the people.",
+            "children": [
+              {
+                "id": "privacy",
+                "label": "Privacy",
+                "summary": "Personal autonomy and due process place limits on state intrusion."
+              },
+              {
+                "id": "participation",
+                "label": "Participation",
+                "summary": "Voting, representation, and accountability sustain legitimate government."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
