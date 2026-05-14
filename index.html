@@ -11,7 +11,7 @@
         --surface: rgba(255, 255, 255, 0.06);
         --border: rgba(255, 255, 255, 0.15);
         --text: #eef2ff;
-        --muted: #cbd5e1;
+        --muted: #dbe4f0;
         --accent: #8b5cf6;
       }
 
@@ -161,7 +161,9 @@
         .catch((error) => {
           console.error(error);
           document.getElementById("description").textContent =
-            "Failed to load constitutional principles. Please refresh the page or check your connection.";
+            error instanceof SyntaxError
+              ? "The constitutional principles data could not be read. Please try again later."
+              : "Failed to load constitutional principles. Please refresh the page or check your connection.";
         });
     </script>
   </body>
